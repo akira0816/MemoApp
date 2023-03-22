@@ -9,8 +9,9 @@
   "dependencies": {
     "expo": "~48.0.6",
     "expo-status-bar": "~1.4.4",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-native": "0.71.3"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-48.0.0.tar.gz"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
