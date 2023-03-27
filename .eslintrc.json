@@ -16,5 +16,6 @@
     "react/react-in-jsx-scope": "off",
     "quotes": "off",
     "linebreak-style": "off"
-  }
+  },
+  "object-curly-newline": "none"
 }
