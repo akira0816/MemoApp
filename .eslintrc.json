@@ -12,6 +12,7 @@
   "plugins": ["react"],
   "rules": {
     "no-use-before-define": 0,
+    "react/prop-types": ["error", { "ignore": ["navigation"] }],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "quotes": "off",
