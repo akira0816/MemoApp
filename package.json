@@ -13,6 +13,7 @@
     "@use-expo/font": "^2.0.0",
     "expo": "~48.0.6",
     "expo-status-bar": "~1.4.4",
+    "firebase": "^9.19.1",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-48.0.0.tar.gz",
