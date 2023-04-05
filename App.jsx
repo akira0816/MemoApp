@@ -14,7 +14,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LogIn"
+        initialRouteName="SignUp"
         screenOptions={{
           headerStyle: {
             backgroundColor: "#467FD3",
@@ -26,6 +26,7 @@ export default function App() {
           headerTintColor: "#FFF",
           headerBackTitle: "back",
           animation: "slide_from_right",
+          //反映されない↓
           gestureEnabled: true,
           gestureDirection: "horizontal",
         }}

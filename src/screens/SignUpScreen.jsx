@@ -6,15 +6,39 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Button from "../components/Button";
+import { useState } from "react";
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput value="EmailAdress" style={styles.input} />
-        <TextInput value="PassWord" style={styles.input} />
+        <TextInput
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          style={styles.input}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Adress"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          style={styles.input}
+          autoCapitalize="none"
+          placeholder="password"
+          secureTextEntry
+          textContentType="password"
+        />
         <Button
           label="Submit"
           onPress={() => {
