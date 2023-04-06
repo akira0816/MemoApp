@@ -7,14 +7,31 @@ import {
   Alert,
 } from "react-native";
 import Button from "../components/Button";
-import { useState } from "react";
-import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState, useEffect } from "react";
+// import { auth } from "../firebase";
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  getAuth,
+} from "firebase/auth";
 
 export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "MemoList" }],
+        });
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   function handlePress() {
     signInWithEmailAndPassword(auth, email, password)
