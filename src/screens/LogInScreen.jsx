@@ -13,6 +13,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   getAuth,
+  setPersistence,
+  browserSessionPersistence,
 } from "firebase/auth";
 
 export default function LogInScreen(props) {

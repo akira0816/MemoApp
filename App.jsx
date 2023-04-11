@@ -8,6 +8,8 @@ import MemoCreateScreen from "./src/screens/MemoCreateScreen";
 import MemoEditScreen from "./src/screens/MemoEditScreen";
 import MemoListScreen from "./src/screens/MemoListScreen";
 
+require("firebase/firestore");
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
