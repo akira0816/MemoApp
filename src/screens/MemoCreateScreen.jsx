@@ -22,7 +22,7 @@ export default function MemoCreateScreen(props) {
     // await addDoc(collection(db, "memos"), { bodyText: "hello" })
     await addDoc(collection(db, `users/${currentUser.uid}/memos`), {
       bodyText,
-      updatedAd: new Date(),
+      updatedAt: new Date(),
     })
       // setDoc(ref, { bodyText: "hello" })
       .then((docRef) => {
