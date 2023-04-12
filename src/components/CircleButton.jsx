@@ -8,7 +8,7 @@ export default function CircleButton(props) {
   const { style, name, onPress } = props;
   return (
     <TouchableOpacity style={[styles.circleButton, style]} onPress={onPress}>
-      <Icon name={name} size={40} color="white" />
+      <Icon name={name} size={40} color='white' />
       {/* <Feather name={name} size={32} color="white" /> */}
     </TouchableOpacity>
   );
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     right: 40,
-    bottom: 40,
+    bottom: 120,
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.25,

@@ -7,6 +7,8 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import MemoCreateScreen from "./src/screens/MemoCreateScreen";
 import MemoEditScreen from "./src/screens/MemoEditScreen";
 import MemoListScreen from "./src/screens/MemoListScreen";
+import KeyboardAvoidingComponent from "./src/screens/test";
+import MemoCreateScreen2 from "./src/screens/MemoCreateScreen2";
 
 require("firebase/firestore");
 
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LogIn"
+        initialRouteName='LogIn'
         screenOptions={{
           headerStyle: {
             backgroundColor: "#467FD3",
@@ -33,19 +35,21 @@ export default function App() {
           gestureDirection: "horizontal",
         }}
       >
-        <Stack.Screen name="MemoList" component={MemoListScreen} />
-        <Stack.Screen name="MemoDetail" component={MemoDetailScreen} />
-        <Stack.Screen name="MemoEdit" component={MemoEditScreen} />
-        <Stack.Screen name="MemoCreate" component={MemoCreateScreen} />
+        <Stack.Screen name='Test' component={KeyboardAvoidingComponent} />
+        <Stack.Screen name='MemoCreate2' component={MemoCreateScreen2} />
+        <Stack.Screen name='MemoList' component={MemoListScreen} />
+        <Stack.Screen name='MemoDetail' component={MemoDetailScreen} />
+        <Stack.Screen name='MemoEdit' component={MemoEditScreen} />
+        <Stack.Screen name='MemoCreate' component={MemoCreateScreen} />
         <Stack.Screen
-          name="LogIn"
+          name='LogIn'
           component={LogInScreen}
           options={{
             animation: "fade",
           }}
         />
         <Stack.Screen
-          name="SignUp"
+          name='SignUp'
           component={SignUpScreen}
           options={{
             animation: "fade",

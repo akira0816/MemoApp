@@ -1,17 +1,22 @@
+import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
-  TextInput,
   KeyboardAvoidingView,
+  TextInput,
+  StyleSheet,
+  Text,
+  Platform,
+  TouchableWithoutFeedback,
+  Button,
+  Keyboard,
 } from "react-native";
 
 import CircleButton from "../components/CircleButton";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { auth } from "../firebase";
-import { useState } from "react";
 
-export default function MemoCreateScreen(props) {
+const MemoCreateScreen = (props) => {
   const { navigation } = props;
   const [bodyText, setBodyText] = useState("");
 
@@ -33,26 +38,29 @@ export default function MemoCreateScreen(props) {
         console.log("error!", error);
       });
   }
+
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      behavior={Platform.OS === "ios" ? "padding" : null}
       style={styles.container}
     >
-      <View style={styles.inputContainer}>
-        <TextInput
-          value={bodyText}
-          multiline
-          style={styles.input}
-          onChangeText={(text) => {
-            setBodyText(text);
-          }}
-          autoFocus
-        />
-      </View>
-      <CircleButton name="check" onPress={handlePress} />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={bodyText}
+            multiline
+            style={styles.input}
+            onChangeText={(text) => {
+              setBodyText(text);
+            }}
+            // autoFocus
+          />
+          <CircleButton name='check' onPress={handlePress} />
+        </View>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -68,5 +76,8 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     fontSize: 16,
     lineHeight: 24,
+    // backgroundColor: "#FFFFFF",
   },
 });
+
+export default MemoCreateScreen;
