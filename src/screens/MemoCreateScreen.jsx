@@ -7,8 +7,10 @@ import {
   Text,
   Platform,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   Button,
   Keyboard,
+  InputAccessoryView,
 } from "react-native";
 
 import CircleButton from "../components/CircleButton";
@@ -17,6 +19,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { auth } from "../firebase";
 
 const MemoCreateScreen = (props) => {
+  const inputAccessoryViewID = "uniqueID";
+
   const { navigation } = props;
   const [bodyText, setBodyText] = useState("");
 
@@ -53,8 +57,24 @@ const MemoCreateScreen = (props) => {
             onChangeText={(text) => {
               setBodyText(text);
             }}
+            inputAccessoryViewID={inputAccessoryViewID}
             // autoFocus
           />
+          {Platform.OS === "ios" && (
+            <InputAccessoryView
+              nativeID={inputAccessoryViewID}
+              backgroundColor='rgba(0,0,0,0)'
+            >
+              <View style={{ alignItems: "flex-end" }}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => Keyboard.dismiss()}
+                >
+                  <Text style={styles.buutonText}>完了</Text>
+                </TouchableOpacity>
+              </View>
+            </InputAccessoryView>
+          )}
           <CircleButton name='check' onPress={handlePress} />
         </View>
       </TouchableWithoutFeedback>
@@ -77,6 +97,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     // backgroundColor: "#FFFFFF",
+  },
+  button: {
+    width: 60,
+    alignItems: "center",
+    padding: 10,
+    height: 100,
+  },
+  buutonText: {
+    paddingVertical: 60,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "hsl(210, 100%, 60%)",
   },
 });
 
