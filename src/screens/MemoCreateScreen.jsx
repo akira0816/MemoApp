@@ -8,7 +8,6 @@ import {
   Platform,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  Button,
   Keyboard,
   InputAccessoryView,
 } from "react-native";
@@ -58,7 +57,7 @@ const MemoCreateScreen = (props) => {
               setBodyText(text);
             }}
             inputAccessoryViewID={inputAccessoryViewID}
-            // autoFocus
+            autoFocus
           />
           {Platform.OS === "ios" && (
             <InputAccessoryView
@@ -96,7 +95,6 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     fontSize: 16,
     lineHeight: 24,
-    // backgroundColor: "#FFFFFF",
   },
   button: {
     width: 60,

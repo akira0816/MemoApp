@@ -61,7 +61,7 @@ export default function MemoEditScreen(props) {
               setBody(text);
             }}
             inputAccessoryViewID={inputAccessoryViewID}
-            // autoFocus
+            autoFocus
           />
           {Platform.OS === "ios" && (
             <InputAccessoryView

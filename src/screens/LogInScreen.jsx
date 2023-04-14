@@ -16,11 +16,13 @@ import {
   setPersistence,
   browserSessionPersistence,
 } from "firebase/auth";
+import Loading from "../components/Loading";
 
 export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(true);
   const auth = getAuth();
 
   useEffect(() => {
@@ -30,12 +32,15 @@ export default function LogInScreen(props) {
           index: 0,
           routes: [{ name: "MemoList" }],
         });
+      } else {
+        setLoading(false);
       }
     });
     return unsubscribe;
   }, []);
 
   function handlePress() {
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentail) => {
         const { user } = userCredentail;
@@ -47,11 +52,15 @@ export default function LogInScreen(props) {
       })
       .catch((error) => {
         Alert.alert(error.code);
+      })
+      .then(() => {
+        setLoading(false);
       });
   }
 
   return (
     <View style={styles.container}>
+      <Loading isLoding={isLoading} />
       <View style={styles.inner}>
         <Text style={styles.title}>Log In</Text>
         <TextInput
@@ -60,10 +69,10 @@ export default function LogInScreen(props) {
             setEmail(text);
           }}
           style={styles.input}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          placeholder="Email Adress"
-          textContentType="emailAddress"
+          autoCapitalize='none'
+          keyboardType='email-address'
+          placeholder='Email Adress'
+          textContentType='emailAddress'
         />
         <TextInput
           value={password}
@@ -71,12 +80,12 @@ export default function LogInScreen(props) {
             setPassword(text);
           }}
           style={styles.input}
-          autoCapitalize="none"
-          placeholder="password"
+          autoCapitalize='none'
+          placeholder='password'
           secureTextEntry
-          textContentType="password"
+          textContentType='password'
         />
-        <Button label="Submit" onPress={handlePress} />
+        <Button label='Submit' onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>
           <TouchableOpacity
