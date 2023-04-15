@@ -6,19 +6,24 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import Button from "../components/Button";
 import { useState } from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import Button from "../components/Button";
+import { translateErrors } from "../utils";
+import Loading from "../components/Loading";
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const handlePress = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        setLoading(true);
         const { user } = userCredential;
         console.log(user.uid);
         navigation.reset({
@@ -28,12 +33,17 @@ export default function SignUpScreen(props) {
       })
       .catch((error) => {
         console.log(error.code, error.message);
-        Alert.alert(error.code);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.descrption);
+      })
+      .then(() => {
+        setLoading(false);
       });
   };
 
   return (
     <View style={styles.container}>
+      <Loading isLoding={isLoading} />
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
         <TextInput
@@ -42,10 +52,10 @@ export default function SignUpScreen(props) {
             setEmail(text);
           }}
           style={styles.input}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          placeholder="Email Adress"
-          textContentType="emailAddress"
+          autoCapitalize='none'
+          keyboardType='email-address'
+          placeholder='Email Adress'
+          textContentType='emailAddress'
         />
         <TextInput
           value={password}
@@ -53,12 +63,12 @@ export default function SignUpScreen(props) {
             setPassword(text);
           }}
           style={styles.input}
-          autoCapitalize="none"
-          placeholder="email-address"
+          autoCapitalize='none'
+          placeholder='email-address'
           secureTextEntry
-          textContentType="password"
+          textContentType='password'
         />
-        <Button label="Submit" onPress={handlePress} />
+        <Button label='Submit' onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
           <TouchableOpacity

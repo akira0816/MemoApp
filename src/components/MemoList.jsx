@@ -11,10 +11,36 @@ import { shape, string, instanceOf, arrayOf } from "prop-types";
 
 import Icon from "./icon";
 import { dateToString } from "../utils";
+import { auth, db } from "../firebase";
+import { collection, deleteDoc, doc } from "firebase/firestore";
 
 export default function MemoList(props) {
   const { memos } = props;
   const navigation = useNavigation();
+
+  function deleteMemo(id) {
+    const { currentUser } = auth;
+    if (currentUser) {
+      const c = collection(db, `users/${currentUser.uid}/memos`);
+      const ref = doc(c, id);
+      Alert.alert("メモを削除します", "よろしいですか？", [
+        {
+          text: "キャンセル",
+          onPress: () => {},
+        },
+        {
+          text: "削除する",
+          style: "destructive",
+          onPress: () => {
+            //firebaseのデータの削除
+            deleteDoc(ref).catch(() => {
+              Alert.alert("削除に失敗しました");
+            });
+          },
+        },
+      ]);
+    }
+  }
 
   const RemderItem = ({ item }) => {
     return (
@@ -35,7 +61,7 @@ export default function MemoList(props) {
         <TouchableOpacity
           style={styles.memoDelete}
           onPress={() => {
-            Alert.alert("Are you sure?");
+            deleteMemo(item.id);
           }}
         >
           <Icon name='delete' size={24} color='#B0B0B0' />
